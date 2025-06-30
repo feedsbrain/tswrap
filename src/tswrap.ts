@@ -113,14 +113,14 @@ export function isAxiosError (arg: any): arg is AxiosError {
  * @example
  *  const data = parseData<PostBodyInterfaceType>(req.body, PostBodyInterface)
  */
-export function parseData<T> (data: any, structure: iots.TypeC<any> | iots.IntersectionC<any> | iots.ArrayC<any>): Left<iots.Errors, any> | T {
+export function parseData<T> (data: any, structure: iots.TypeC<any> | iots.IntersectionC<any> | iots.ArrayC<any>): Left<iots.Errors> | T {
   const decoded = structure.decode(data)
 
-  if (decoded.isLeft()) {
+  if (decoded._tag === 'Left') {
     return decoded
   }
 
-  return decoded.value as T
+  return decoded.right as T
 }
 
 /**
@@ -137,6 +137,6 @@ export function parseData<T> (data: any, structure: iots.TypeC<any> | iots.Inter
  *    ...
  *  }
  */
-export function isParseError (arg: any): arg is Left<iots.Errors, any> {
+export function isParseError (arg: any): arg is Left<iots.Errors> {
   return arg && arg._tag === 'Left'
 }
