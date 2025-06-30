@@ -1,5 +1,5 @@
 {
-  "name": "tswrap",
+  "name": "@feedsbrain/tswrap",
   "version": "1.0.5",
   "description": "Random assortment of Typescript utilities, wrappers, and types.",
   "main": "build/tswrap.js",
